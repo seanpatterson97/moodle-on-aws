@@ -69,3 +69,50 @@ resource "aws_security_group_rule" "alb_cloudfront_https_ingress_only" {
   to_port           = 443
   type              = "ingress"
 }
+
+########################################################################################################################
+## Configure security group for RDS instance
+########################################################################################################################
+
+resource "aws_security_group" "rds" {
+  name        = "${var.namespace}_RDS_SecurityGroup_${var.environment}"
+  description = "Security group for RDS database"
+  vpc_id      = aws_vpc.default.id
+
+  ingress {
+    description     = "Allow ingress traffic on the necessary port"
+    from_port       = var.db_port 
+    to_port         = var.db_port 
+    protocol        = "tcp"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
+  egress {
+    description = "Allow all egress traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name     = "${var.namespace}_RDS_SecurityGroup_${var.environment}"
+    Scenario = var.scenario
+  }
+}
+
+
+########################################################################################################################
+## SG for EFS Mount Target
+########################################################################################################################
+
+resource "aws_security_group" "efs_mount_target_sg" {
+  vpc_id = aws_vpc.default.id
+
+  ingress {
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+}

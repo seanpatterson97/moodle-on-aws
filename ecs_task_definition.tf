@@ -2,6 +2,7 @@
 ## Creates ECS Task Definition
 ########################################################################################################################
 
+
 resource "aws_ecs_task_definition" "default" {
   family                   = "${var.namespace}_ECS_TaskDefinition_${var.environment}"
   network_mode             = "awsvpc"
@@ -23,6 +24,37 @@ resource "aws_ecs_task_definition" "default" {
           hostPort      = var.container_port
           protocol      = "tcp"
         }
+      ]
+      #environment mappings
+      environment = [
+        {
+          name  = "MOODLE_DATABASE_NAME"
+          value = var.db_name
+        },
+        {
+          name  = "MOODLE_DATABASE_USER"
+          value = var.db_username
+        },
+        {
+          name  = "MOODLE_DATABASE_PASSWORD"
+          value = var.db_password
+        },
+        {
+          name  = "MOODLE_DATABASE_ROOT_PASSWORD"
+          value = var.db_password
+        },
+        {
+          name  = "MOODLE_DATABASE_HOST"
+          value = aws_db_instance.default.address
+        },
+        {
+          name  = "BITNAMI_DEBUG"
+          value = "true"
+        },
+        {
+          name  = "MOODLE_SKIP_INSTALL"
+          value = "true"
+        },
       ]
       logConfiguration = {
         logDriver = "awslogs"

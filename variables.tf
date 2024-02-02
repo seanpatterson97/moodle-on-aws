@@ -186,3 +186,77 @@ variable "healthcheck_matcher" {
   type        = string
   default     = "200"
 }
+
+########################################################################################################################
+## RDS variables
+########################################################################################################################
+
+variable "db_name" {
+  description = "Name of the database"
+  type        = string
+  default     = "application_database"
+}
+
+variable "db_engine" {
+  description = "What type of database to utilize"
+  type = string
+  default = "mariadb"
+}
+
+# configured in tf cloud
+variable "db_username" {
+  description = "Username for the database"
+  type        = string
+  }
+
+variable "db_password" {
+  description = "Password for the database"
+  type        = string
+  default     = "foobarbaz"
+}
+
+variable "db_allocated_storage" {
+  description = "Amount of storage allocated for the database"
+  type        = number
+  default     = 10
+}
+
+variable "db_max_allocated_storage" {
+  description = "Maximum amount of storage allocated for the database"
+  type        = number
+  default     = 20
+}
+
+variable "db_deletion_protection" {
+  description = "Prevents the database from being deleted"
+  type        = bool
+  default     = false
+}
+
+variable "db_instance_class" {
+  description = "Instance class for the database"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "db_port" {
+  description = "Port for the database"
+  type        = number
+  default     = 3306
+}
+
+########################################################################################################################
+## EFS volume
+########################################################################################################################
+
+variable "ebs_volume_size" {
+  description = "Size of the EBS volume in GB"
+  type        = number
+  default     = 10
+}
+
+variable "ebs_availability_zone" {
+  description = "Availability zone for the EBS volume"
+  type        = string
+  default     = "us-east-1a"
+}
