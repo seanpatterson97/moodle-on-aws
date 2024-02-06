@@ -109,9 +109,17 @@ resource "aws_security_group" "rds" {
 resource "aws_security_group" "efs_mount_target_sg" {
   vpc_id = aws_vpc.default.id
 
+  # Allow NFS traffic from the VPC CIDR block
   ingress {
     from_port   = 2049
     to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+  # Allow encrypted NFS traffic from the VPC CIDR block
+  ingress {
+    from_port   = 2999
+    to_port     = 2999
     protocol    = "tcp"
     cidr_blocks = [var.vpc_cidr_block]
   }

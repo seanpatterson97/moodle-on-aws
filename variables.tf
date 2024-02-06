@@ -8,12 +8,6 @@ variable "namespace" {
   type        = string
 }
 
-#variable "root_domain_name" {
-#  description = "value of the root domain name (like example.com)"
-#  type        = string
-#}
-
-
 variable "domain_name" {
   description = "Domain name of the service (like service.example.com)"
   type        = string
@@ -126,13 +120,13 @@ variable "container_port" {
 
 variable "cpu_units" {
   description = "Amount of CPU units for a single ECS task"
-  default     = 256
+  default     = 512
   type        = number
 }
 
 variable "memory" {
   description = "Amount of memory in MB for a single ECS task"
-  default     = 512
+  default     = 1024
   type        = number
 }
 
@@ -156,24 +150,9 @@ variable "ecr_force_delete" {
   type        = bool
 }
 
-# CONFIGURING THIS TO PRINT RANDOM STRING PER AWS BEST PRACTICES
-
-#variable "hash" {
-#  description = "Task hash that simulates a unique version for every new deployment of the ECS Task"
-#  type        = string
-#}
-
 ########################################################################################################################
 ## ALB
 ########################################################################################################################
-
-# CONFIGURING THIS TO PRINT RANDOM STRING PER AWS BEST PRACTICES
-
-#variable "custom_origin_host_header" {
-#  description = "Custom header to ensure communication only through CloudFront"
-#  default     = "Demo123"
-#  type        = string
-#}
 
 variable "healthcheck_endpoint" {
   description = "Endpoint for ALB healthcheck"
@@ -243,20 +222,4 @@ variable "db_port" {
   description = "Port for the database"
   type        = number
   default     = 3306
-}
-
-########################################################################################################################
-## EFS volume
-########################################################################################################################
-
-variable "ebs_volume_size" {
-  description = "Size of the EBS volume in GB"
-  type        = number
-  default     = 10
-}
-
-variable "ebs_availability_zone" {
-  description = "Availability zone for the EBS volume"
-  type        = string
-  default     = "us-east-1a"
 }

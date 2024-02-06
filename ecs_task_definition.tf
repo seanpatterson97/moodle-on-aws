@@ -1,13 +1,9 @@
-########################################################################################################################
-## Creates ECS Task Definition
-########################################################################################################################
-
-
 resource "aws_ecs_task_definition" "default" {
   family                   = "${var.namespace}_ECS_TaskDefinition_${var.environment}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn            = aws_iam_role.efs_task_role.arn
   cpu                      = var.cpu_units
   memory                   = var.memory
 
@@ -15,6 +11,8 @@ resource "aws_ecs_task_definition" "default" {
     {
       name         = var.service_name
       image        = "${aws_ecr_repository.ecr.repository_url}:latest"
+      user         = "0"
+      group        = "0"
       cpu          = var.cpu_units
       memory       = var.memory
       essential    = true
@@ -25,7 +23,6 @@ resource "aws_ecs_task_definition" "default" {
           protocol      = "tcp"
         }
       ]
-      #environment mappings
       environment = [
         {
           name  = "MOODLE_DATABASE_NAME"
@@ -55,7 +52,18 @@ resource "aws_ecs_task_definition" "default" {
           name  = "MOODLE_SKIP_INSTALL"
           value = "true"
         },
+        {
+          name  = "MOODLE_DATA_DIR"
+          value = "/bitnami/moodledata"
+        },
       ]
+      mountPoints = [
+        {
+          sourceVolume  = "moodledata-storage-vol"
+          containerPath = "/bitnami/moodledata"
+        },
+      ]
+      
       logConfiguration = {
         logDriver = "awslogs"
         options   = {
@@ -66,6 +74,19 @@ resource "aws_ecs_task_definition" "default" {
       }
     }
   ])
+
+  volume {
+    name = "moodledata-storage-vol"
+    efs_volume_configuration {
+      file_system_id          = aws_efs_file_system.moodledata-folder.id
+      transit_encryption      = "ENABLED"
+      transit_encryption_port = 2999
+      authorization_config {
+        access_point_id = aws_efs_access_point.moodledata_access_point.id
+        iam             = "ENABLED"
+      }
+    }
+  }
 
   tags = {
     Scenario = var.scenario

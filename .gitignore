@@ -38,3 +38,6 @@ terraform.rc
 
 # Ignore todo file
 todo.txt
+
+# Ignore infrastructure that exists for troubleshooting. Ex: Instance Gateway
+dev-infrastructure.tf

@@ -39,3 +39,47 @@ resource "aws_iam_role" "ecs_task_iam_role" {
     Scenario = var.scenario
   }
 }
+
+########################################################################################################################
+## IAM Role for allowing access to EFS on ECS
+########################################################################################################################
+
+resource "aws_iam_role" "efs_task_role" {
+  name = "efs_task_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "efs_task_role_policy" {
+  name = "efs_task_role_policy"
+  role = aws_iam_role.efs_task_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "elasticfilesystem:ClientMount",
+          "elasticfilesystem:ClientWrite",
+          "elasticfilesystem:ClientRootAccess",
+          "elasticfilesystem:DescribeMountTargets",
+          "elasticfilesystem:CreateFileSystem",
+          "elasticfilesystem:DeleteFileSystems",
+        ]
+        Effect = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
