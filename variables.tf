@@ -67,6 +67,7 @@ variable "az_count" {
 
 variable "ecs_task_desired_count" {
   description = "How many ECS tasks should run in parallel"
+  default     = 2
   type        = number
 }
 
@@ -115,7 +116,7 @@ variable "target_capacity" {
 variable "container_port" {
   description = "Port of the container"
   type        = number
-  default     = 3000
+  default     = 8080
 }
 
 variable "cpu_units" {

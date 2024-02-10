@@ -1,0 +1,321 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:CreateTags",
+				"ec2:DescribeAddresses",
+				"ec2:DescribeAvailabilityZones",
+				"ec2:DescribeInternetGateways",
+				"ec2:DescribeManagedPrefixLists",
+				"ec2:DescribeNatGateways",
+				"ec2:DescribeNetworkAcls",
+				"ec2:DescribeNetworkInterfaces",
+				"ec2:DescribeRouteTables",
+				"ec2:DescribeSecurityGroupRules",
+				"ec2:DescribeSecurityGroups",
+				"ec2:DescribeSubnets",
+				"ec2:DescribeVpcs",
+				"ec2:DisassociateAddress",
+				"ec2:DisassociateRouteTable",
+				"ec2:ReleaseAddress",
+				"ecr:CreateRepository",
+				"ecr:DescribeRepositories",
+				"ecr:GetAuthorizationToken",
+				"ecs:CreateCluster",
+				"ecs:DeregisterTaskDefinition",
+				"ecs:DescribeTaskDefinition",
+				"ecs:RegisterTaskDefinition",
+				"elasticfilesystem:CreateFileSystem",
+				"elasticfilesystem:DescribeAccessPoints",
+				"elasticfilesystem:DescribeFileSystems",
+				"elasticloadbalancing:CreateListener",
+				"elasticloadbalancing:CreateLoadBalancer",
+				"elasticloadbalancing:DescribeListeners",
+				"elasticloadbalancing:DescribeLoadBalancerAttributes",
+				"elasticloadbalancing:DescribeLoadBalancers",
+				"elasticloadbalancing:DescribeRules",
+				"elasticloadbalancing:DescribeTags",
+				"elasticloadbalancing:DescribeTargetGroupAttributes",
+				"elasticloadbalancing:DescribeTargetGroups",
+				"logs:DescribeLogGroups",
+				"rds:AddTagsToResource",
+				"rds:ListTagsForResource",
+				"sts:GetCallerIdentity"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"cloudwatch:DescribeAlarms",
+				"cloudwatch:PutMetricAlarm"
+			],
+			"Resource": "arn:aws:cloudwatch:us-east-1:${Account}:alarm:${AlarmName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "ec2:AllocateAddress",
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:elastic-ip/${AllocationId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "ec2:DetachNetworkInterface",
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:instance/${InstanceId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:AttachInternetGateway",
+				"ec2:CreateInternetGateway",
+				"ec2:DeleteInternetGateway",
+				"ec2:DetachInternetGateway"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:internet-gateway/${InternetGatewayId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:CreateNatGateway",
+				"ec2:DeleteNatGateway"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:natgateway/${NatGatewayId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "ec2:DetachNetworkInterface",
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:network-interface/${NetworkInterfaceId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "ec2:GetManagedPrefixListEntries",
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:prefix-list/${PrefixListId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:AssociateRouteTable",
+				"ec2:CreateRoute",
+				"ec2:CreateRouteTable",
+				"ec2:DeleteRouteTable",
+				"ec2:ReplaceRouteTableAssociation"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:route-table/${RouteTableId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:AuthorizeSecurityGroupEgress",
+				"ec2:AuthorizeSecurityGroupIngress",
+				"ec2:CreateSecurityGroup",
+				"ec2:DeleteSecurityGroup",
+				"ec2:RevokeSecurityGroupEgress",
+				"ec2:RevokeSecurityGroupIngress"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:security-group/${SecurityGroupId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:CreateNatGateway",
+				"ec2:CreateSubnet",
+				"ec2:DeleteSubnet",
+				"ec2:ModifySubnetAttribute"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:subnet/${SubnetId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:AttachInternetGateway",
+				"ec2:CreateRouteTable",
+				"ec2:CreateSubnet",
+				"ec2:CreateVpc",
+				"ec2:DeleteVpc",
+				"ec2:DescribeVpcAttribute",
+				"ec2:DetachInternetGateway",
+				"ec2:ModifyVpcAttribute"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:${Account}:vpc/${VpcId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ecr:BatchCheckLayerAvailability",
+				"ecr:CompleteLayerUpload",
+				"ecr:DeleteRepository",
+				"ecr:InitiateLayerUpload",
+				"ecr:ListTagsForResource",
+				"ecr:PutImage",
+				"ecr:TagResource",
+				"ecr:UploadLayerPart"
+			],
+			"Resource": "arn:aws:ecr:us-east-1:${Account}:repository/${RepositoryName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ecs:DeleteCluster",
+				"ecs:DescribeClusters"
+			],
+			"Resource": "arn:aws:ecs:us-east-1:${Account}:cluster/${ClusterName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ecs:CreateService",
+				"ecs:DeleteService",
+				"ecs:DescribeServices",
+				"ecs:UpdateService"
+			],
+			"Resource": "arn:aws:ecs:us-east-1:${Account}:service/${ClusterName}/${ServiceName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "elasticfilesystem:DeleteAccessPoint",
+			"Resource": "arn:aws:elasticfilesystem:us-east-1:${Account}:access-point/${AccessPointId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"elasticfilesystem:CreateAccessPoint",
+				"elasticfilesystem:CreateMountTarget",
+				"elasticfilesystem:DeleteFileSystem",
+				"elasticfilesystem:DeleteMountTarget",
+				"elasticfilesystem:DescribeLifecycleConfiguration",
+				"elasticfilesystem:DescribeMountTargetSecurityGroups",
+				"elasticfilesystem:DescribeMountTargets"
+			],
+			"Resource": "arn:aws:elasticfilesystem:us-east-1:${Account}:file-system/${FileSystemId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "elasticloadbalancing:DeleteRule",
+			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "elasticloadbalancing:DeleteRule",
+			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"elasticloadbalancing:CreateRule",
+				"elasticloadbalancing:DeleteListener"
+			],
+			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"elasticloadbalancing:CreateRule",
+				"elasticloadbalancing:DeleteListener"
+			],
+			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"elasticloadbalancing:AddTags",
+				"elasticloadbalancing:DeleteLoadBalancer",
+				"elasticloadbalancing:ModifyLoadBalancerAttributes"
+			],
+			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:loadbalancer/${LoadBalancerName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"elasticloadbalancing:CreateTargetGroup",
+				"elasticloadbalancing:DeleteTargetGroup",
+				"elasticloadbalancing:ModifyTargetGroupAttributes"
+			],
+			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"iam:AttachRolePolicy",
+				"iam:CreateRole",
+				"iam:DeleteRole",
+				"iam:DeleteRolePolicy",
+				"iam:DetachRolePolicy",
+				"iam:GetRole",
+				"iam:GetRolePolicy",
+				"iam:ListAttachedRolePolicies",
+				"iam:ListInstanceProfilesForRole",
+				"iam:ListRolePolicies",
+				"iam:PutRolePolicy"
+			],
+			"Resource": "arn:aws:iam::${Account}:role/${RoleNameWithPath}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"kms:CreateGrant",
+				"kms:Decrypt",
+				"kms:DescribeKey",
+				"kms:GenerateDataKey"
+			],
+			"Resource": "arn:aws:kms:us-east-1:${Account}:key/${KeyId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:DeleteLogGroup",
+				"logs:ListTagsLogGroup",
+				"logs:PutRetentionPolicy"
+			],
+			"Resource": "arn:aws:logs:us-east-1:${Account}:log-group:${LogGroupName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"rds:CreateDBInstance",
+				"rds:CreateTenantDatabase",
+				"rds:DeleteDBInstance",
+				"rds:DeleteTenantDatabase",
+				"rds:DescribeDBInstances"
+			],
+			"Resource": "arn:aws:rds:us-east-1:${Account}:db:${DbInstanceName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"rds:CreateDBParameterGroup",
+				"rds:DeleteDBParameterGroup",
+				"rds:DescribeDBParameterGroups",
+				"rds:DescribeDBParameters",
+				"rds:ModifyDBParameterGroup"
+			],
+			"Resource": "arn:aws:rds:us-east-1:${Account}:pg:${ParameterGroupName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"rds:CreateDBSubnetGroup",
+				"rds:DeleteDBSubnetGroup",
+				"rds:DescribeDBSubnetGroups"
+			],
+			"Resource": "arn:aws:rds:us-east-1:${Account}:subgrp:${SubnetGroupName}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"rds:CreateTenantDatabase",
+				"rds:DeleteTenantDatabase"
+			],
+			"Resource": "arn:aws:rds:us-east-1:${Account}:tenant-database:${TenantResourceId}"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"secretsmanager:CreateSecret",
+				"secretsmanager:TagResource"
+			],
+			"Resource": "arn:aws:secretsmanager:us-east-1:${Account}:secret:${SecretId}"
+		}
+	]
+}

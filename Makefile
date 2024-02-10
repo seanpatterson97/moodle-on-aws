@@ -1,9 +1,8 @@
 # Makefile to wrap terraform commands
 
 plan:
-	terraform plan -var="first_deploy=false"
+	terraform plan -var="moodle_skip_install=true"
 
-# Used to create a fresh repo, deploy the initial container, perform necessary database setup for moodle, then update the service to skip insatall for future containers
 first-deploy: 
 	sh ./first-deploy.sh
 
