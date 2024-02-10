@@ -178,20 +178,20 @@ variable "db_name" {
 
 variable "db_engine" {
   description = "What type of database to utilize"
-  type = string
-  default = "mariadb"
+  type        = string
+  default     = "mariadb"
 }
 
 # configured in tf cloud
 variable "db_username" {
   description = "Username for the database"
   type        = string
-  }
+}
 
 variable "db_password" {
   description = "Password for the database"
   type        = string
-  default     = "foobarbaz"
+  default     = "foobar"
 }
 
 variable "db_allocated_storage" {
@@ -222,4 +222,13 @@ variable "db_port" {
   description = "Port for the database"
   type        = number
   default     = 3306
+}
+
+########################################################################################################################
+## Moodle-specific values
+########################################################################################################################
+
+variable "moodle_skip_install" {
+  description = "Must be set to true or false. If set to true, allows moodle to run initial install script to provision databse. If false, skips this step so that container instances do not fail on startup."
+  type        = string
 }

@@ -2,7 +2,6 @@
 ## Define unique header value for CloudFront security
 ##########################################################################################
 
-
 resource "random_id" "random_custom_origin_host_header" {
   byte_length = 8
 }
@@ -10,7 +9,6 @@ resource "random_id" "random_custom_origin_host_header" {
 locals {
   custom_origin_host_header = random_id.random_custom_origin_host_header.id
 }
-
 
 ########################################################################################################################
 ## CloudFront distribution
@@ -44,7 +42,6 @@ resource "aws_cloudfront_distribution" "default" {
 
     custom_header {
       name  = "X-Custom-Header"
-      #value = var.custom_origin_host_header
       value = local.custom_origin_host_header
     }
 

@@ -21,7 +21,7 @@ resource "aws_internet_gateway" "default" {
   vpc_id = aws_vpc.default.id
 
   tags = {
-    Name = "${var.namespace}_InternetGateway_${var.environment}"
+    Name     = "${var.namespace}_InternetGateway_${var.environment}"
     Scenario = var.scenario
   }
 }

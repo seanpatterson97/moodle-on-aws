@@ -1,14 +1,3 @@
-# Find the most recent certificate issued by (not imported into) ACM. Can be removed once Certificates are managed within Terraform.
-#data "aws_acm_certificate" "amazon_issued" {
-#  domain      = var.root_domain_name
-#  types       = ["AMAZON_ISSUED"]
-#  #most_recent = true
-#  tags = {
-#    "Main" = "True"
-#  }
-#}
-
-
 ########################################################################################################################
 ## Certificate for Application Load Balancer including validation via CNAME record
 ########################################################################################################################

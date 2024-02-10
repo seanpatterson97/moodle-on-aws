@@ -9,13 +9,13 @@ resource "aws_ecs_task_definition" "default" {
 
   container_definitions = jsonencode([
     {
-      name         = var.service_name
-      image        = "${aws_ecr_repository.ecr.repository_url}:latest"
-      user         = "0"
-      group        = "0"
-      cpu          = var.cpu_units
-      memory       = var.memory
-      essential    = true
+      name      = var.service_name
+      image     = "${aws_ecr_repository.ecr.repository_url}:latest"
+      user      = "0"
+      group     = "0"
+      cpu       = var.cpu_units
+      memory    = var.memory
+      essential = true
       portMappings = [
         {
           containerPort = var.container_port
@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "default" {
         },
         {
           name  = "MOODLE_SKIP_INSTALL"
-          value = "true"
+          value = var.moodle_skip_install
         },
         {
           name  = "MOODLE_DATA_DIR"
@@ -63,10 +63,10 @@ resource "aws_ecs_task_definition" "default" {
           containerPath = "/bitnami/moodledata"
         },
       ]
-      
+
       logConfiguration = {
         logDriver = "awslogs"
-        options   = {
+        options = {
           "awslogs-group"         = aws_cloudwatch_log_group.log_group.name
           "awslogs-region"        = var.region
           "awslogs-stream-prefix" = "${var.service_name}-log-stream-${var.environment}"

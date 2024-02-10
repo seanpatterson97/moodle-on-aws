@@ -4,7 +4,7 @@
 ########################################################################################################################
 
 resource "aws_route53_zone" "service" {
-  name  = var.domain_name
+  name = var.domain_name
 }
 
 resource "aws_route53_record" "service" {
@@ -25,7 +25,7 @@ resource "aws_route53_record" "service" {
 ########################################################################################################################
 
 resource "aws_route53_zone" "environment" {
-  name  = "${var.environment}.${var.domain_name}"
+  name = "${var.environment}.${var.domain_name}"
 }
 
 resource "aws_route53_record" "environment" {

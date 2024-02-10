@@ -3,7 +3,7 @@ provider "aws" {
   alias = "us_east_1"
   default_tags {
     tags = {
-      Terraformed     = "True"
+      Terraformed = "True"
     }
   }
 }

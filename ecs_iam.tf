@@ -77,7 +77,7 @@ resource "aws_iam_role_policy" "efs_task_role_policy" {
           "elasticfilesystem:CreateFileSystem",
           "elasticfilesystem:DeleteFileSystems",
         ]
-        Effect = "Allow"
+        Effect   = "Allow"
         Resource = "*"
       },
     ]
