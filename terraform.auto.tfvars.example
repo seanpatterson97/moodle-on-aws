@@ -5,7 +5,7 @@
 domain_name  = "" # Include the subdomain you wish to use. Ex: demo.yoursite.com
 region       = "" # The region you are deploying to. Ex: us-east-1
 service_name = "" # The preferred name of the service you are deploying. Ex: moodle
-tld_zone_id  = "" # The zone id of the TLD. This can be found in Route53
+tld_zone_id  = "" # The zone id of the Top level domain. This can be found in Route53
 
 ########################################################################################################################
 ## Optional Variables
@@ -19,7 +19,7 @@ tld_zone_id  = "" # The zone id of the TLD. This can be found in Route53
 #retention_in_days = 7
 
 # ECS variables
-#container_port = 3000
+#container_port = 8080
 #cpu_target_tracking_desired_value = 70
 #cpu_units = 512
 #ecs_task_deployment_maximum_percent = 100
