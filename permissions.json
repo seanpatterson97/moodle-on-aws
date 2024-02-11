@@ -52,17 +52,17 @@
 				"cloudwatch:DescribeAlarms",
 				"cloudwatch:PutMetricAlarm"
 			],
-			"Resource": "arn:aws:cloudwatch:us-east-1:${Account}:alarm:${AlarmName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "ec2:AllocateAddress",
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:elastic-ip/${AllocationId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "ec2:DetachNetworkInterface",
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:instance/${InstanceId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -72,7 +72,7 @@
 				"ec2:DeleteInternetGateway",
 				"ec2:DetachInternetGateway"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:internet-gateway/${InternetGatewayId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -80,17 +80,17 @@
 				"ec2:CreateNatGateway",
 				"ec2:DeleteNatGateway"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:natgateway/${NatGatewayId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "ec2:DetachNetworkInterface",
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:network-interface/${NetworkInterfaceId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "ec2:GetManagedPrefixListEntries",
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:prefix-list/${PrefixListId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -101,7 +101,7 @@
 				"ec2:DeleteRouteTable",
 				"ec2:ReplaceRouteTableAssociation"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:route-table/${RouteTableId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -113,7 +113,7 @@
 				"ec2:RevokeSecurityGroupEgress",
 				"ec2:RevokeSecurityGroupIngress"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:security-group/${SecurityGroupId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -123,7 +123,7 @@
 				"ec2:DeleteSubnet",
 				"ec2:ModifySubnetAttribute"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:subnet/${SubnetId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -137,7 +137,7 @@
 				"ec2:DetachInternetGateway",
 				"ec2:ModifyVpcAttribute"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:${Account}:vpc/${VpcId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -151,7 +151,7 @@
 				"ecr:TagResource",
 				"ecr:UploadLayerPart"
 			],
-			"Resource": "arn:aws:ecr:us-east-1:${Account}:repository/${RepositoryName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -159,7 +159,7 @@
 				"ecs:DeleteCluster",
 				"ecs:DescribeClusters"
 			],
-			"Resource": "arn:aws:ecs:us-east-1:${Account}:cluster/${ClusterName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -169,12 +169,12 @@
 				"ecs:DescribeServices",
 				"ecs:UpdateService"
 			],
-			"Resource": "arn:aws:ecs:us-east-1:${Account}:service/${ClusterName}/${ServiceName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "elasticfilesystem:DeleteAccessPoint",
-			"Resource": "arn:aws:elasticfilesystem:us-east-1:${Account}:access-point/${AccessPointId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -187,17 +187,17 @@
 				"elasticfilesystem:DescribeMountTargetSecurityGroups",
 				"elasticfilesystem:DescribeMountTargets"
 			],
-			"Resource": "arn:aws:elasticfilesystem:us-east-1:${Account}:file-system/${FileSystemId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "elasticloadbalancing:DeleteRule",
-			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
 			"Action": "elasticloadbalancing:DeleteRule",
-			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -205,7 +205,7 @@
 				"elasticloadbalancing:CreateRule",
 				"elasticloadbalancing:DeleteListener"
 			],
-			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -213,7 +213,7 @@
 				"elasticloadbalancing:CreateRule",
 				"elasticloadbalancing:DeleteListener"
 			],
-			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -222,7 +222,7 @@
 				"elasticloadbalancing:DeleteLoadBalancer",
 				"elasticloadbalancing:ModifyLoadBalancerAttributes"
 			],
-			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:loadbalancer/${LoadBalancerName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -231,7 +231,7 @@
 				"elasticloadbalancing:DeleteTargetGroup",
 				"elasticloadbalancing:ModifyTargetGroupAttributes"
 			],
-			"Resource": "arn:aws:elasticloadbalancing:us-east-1:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -248,7 +248,7 @@
 				"iam:ListRolePolicies",
 				"iam:PutRolePolicy"
 			],
-			"Resource": "arn:aws:iam::${Account}:role/${RoleNameWithPath}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -258,7 +258,7 @@
 				"kms:DescribeKey",
 				"kms:GenerateDataKey"
 			],
-			"Resource": "arn:aws:kms:us-east-1:${Account}:key/${KeyId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -268,7 +268,7 @@
 				"logs:ListTagsLogGroup",
 				"logs:PutRetentionPolicy"
 			],
-			"Resource": "arn:aws:logs:us-east-1:${Account}:log-group:${LogGroupName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -279,7 +279,7 @@
 				"rds:DeleteTenantDatabase",
 				"rds:DescribeDBInstances"
 			],
-			"Resource": "arn:aws:rds:us-east-1:${Account}:db:${DbInstanceName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -290,7 +290,7 @@
 				"rds:DescribeDBParameters",
 				"rds:ModifyDBParameterGroup"
 			],
-			"Resource": "arn:aws:rds:us-east-1:${Account}:pg:${ParameterGroupName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -299,7 +299,7 @@
 				"rds:DeleteDBSubnetGroup",
 				"rds:DescribeDBSubnetGroups"
 			],
-			"Resource": "arn:aws:rds:us-east-1:${Account}:subgrp:${SubnetGroupName}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -307,7 +307,7 @@
 				"rds:CreateTenantDatabase",
 				"rds:DeleteTenantDatabase"
 			],
-			"Resource": "arn:aws:rds:us-east-1:${Account}:tenant-database:${TenantResourceId}"
+			"Resource": "*"
 		},
 		{
 			"Effect": "Allow",
@@ -315,7 +315,7 @@
 				"secretsmanager:CreateSecret",
 				"secretsmanager:TagResource"
 			],
-			"Resource": "arn:aws:secretsmanager:us-east-1:${Account}:secret:${SecretId}"
+			"Resource": "*"
 		}
 	]
 }
