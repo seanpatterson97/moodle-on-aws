@@ -2,18 +2,20 @@
 
 This repository contains demo code for a terraform deployment of [Moodle LMS](https://moodle.org/) on ECS Fargate using [Bitnami's Moodle container for docker](https://bitnami.com/stack/moodle). Although this repository contains components specifically for a deployment of Moodle, this template can be easily modified for alternate container-based projects using similar infrastructure. 
 
-I used public templates as a boilerplate for this project and I am crediting each of my sources in my [[#Acknowledgements]] section. 
+I used public templates as a boilerplate for this project and I am crediting each of my sources under the [Acknowledgments](#acknowledgements) section. 
 
 ### Summary
 
 This project will deploy the following infrastructure:
+
 ![Cloud Architecture](https://github.com/seanpatterson97/moodle-on-aws/assets/60835724/fe02b8da-3ade-437e-942f-33e337b0312d)
 
-Containers are deployed across availability zones in a private subnet, each with EFS access to serve as a central filesystem for the 'moodledata' directory which is responsible for course data. A RDS instance running MariaDB is created with access to the private subnet group. Tasks within the private subnet can connect to external services through the NAT gateway, but external services can only connect to the service through CloudFront. 
+Containers are deployed across availability zones in a private subnet, each with EFS access to serve as a central filesystem for the 'moodledata' directory which is responsible for course data. A RDS instance running MariaDB is created with access to the private subnet group. Tasks within the private subnet can connect to external services through the NAT gateway. External services can only connect to the service through CloudFront. 
 
 CloudFront is configured to redirect all incoming http connections to https before passing traffic to the application load balancer. The ALB is configured to only accept encrypted connections with a unique custom header generated during the deployment of CloudFront. Accepted connections will be passed off to the containers. 
 
 By default, a subdomain of dev.{servicename}.your-domain-name.com is created in Route53 and attached to CloudFront. Certificates are generated in ACM for both CloudFront and the application load balancer.
+
 ### Dependencies
 Docker
 Terraform
@@ -67,17 +69,19 @@ This command will perform the following steps:
 Typically, it takes 15 minutes for this command to deploy. Afterwards the service should be accessible on the subdomain you have created. By default it will be dev.{servicename}.your-domain-name.com
 
 After you are finished with the demo you may run ```make destroy``` to delete the infrastructure to avoid incurring costs.
-### Acknowledgements
 
+### Acknowledgements
 [Aws-scenario-ecs-fargate ](https://github.com/nexgeneerz/aws-scenario-ecs-fargate)
-I utilized this project as a boilerplate from which I began modifying for the needs of this project. This project contains a fantastic [blog post](https://nexgeneerz.io/how-to-setup-amazon-ecs-fargate-terraform/) which details the basics of a modern production-ready solution on fargate.
+This project contains a fantastic [blog post](https://nexgeneerz.io/how-to-setup-amazon-ecs-fargate-terraform/) which details the basics of a modern production-ready solution on fargate. I used it as a starting point for the project.
 
 [Modernize Moodle LMS with AWS serverless containers](https://aws.amazon.com/blogs/publicsector/modernize-moodle-lms-aws-serverless-containers/)
-Another great resource I used to gain insight into some of the moodle-specific requirements for designing the project's architecture. 
+Another great resource used to gain insight into some of the moodle-specific requirements for designing the project's architecture. 
+
 ### Limitations
 * Bitnami moodle has an env variable flag ```MOODLE_SKIP_INSTALL``` which needs to be set to false to run its initial installation and provision the empty database. This value needs to be set to true for subsequent containers to prevent them from failing their install and exiting due to the database tables already existing. 
-	* To avoid manual intervention each time the demo is launched, a value is passed in each terraform command in the Makefile to handle skip the installation process outside of the first deployment.
-	* Upon first deployment, if multiple containers are launched, only one container will succeed in starting up until terraform passes the update to skip the installation.  
+	* To avoid manual intervention each time the demo is launched, a value is passed in each terraform command in the Makefile to handle skip the installation process unless it is for the first deployment.
+	* Upon initial deployment, if multiple containers are launched, only one container will succeed in starting up until terraform passes the update to skip the installation.  
+
 ### Future Implementations 
 * Incorporate ElastiCache for Redis
 * Create a more elegant solution to handle ```MOODLE_SKIP_INSTALL```
