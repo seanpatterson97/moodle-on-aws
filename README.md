@@ -17,11 +17,11 @@ CloudFront is configured to redirect all incoming http connections to https befo
 By default, a subdomain of dev.{servicename}.your-domain-name.com is created in Route53 and attached to CloudFront. Certificates are generated in ACM for both CloudFront and the application load balancer.
 
 ### Dependencies
-Docker
-Terraform
-AWS CLI
-A top level domain in Route53 for the project to reside on
-IAM user with the permissions indicated within the [permissions.json](permissions.json) file
+  * Docker
+  * Terraform
+  * AWS CLI
+  * A top level domain in Route53 for the project to reside on
+  * IAM user with the permissions indicated within the [permissions.json](permissions.json) file
 
 ### Getting Started
 
