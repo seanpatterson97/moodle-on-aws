@@ -3,10 +3,11 @@
 ########################################################################################################################
 
 terraform {
+  # If using terraform cloud 
   cloud {
-    organization = "seanpatterson97"
+    organization = ""
     workspaces {
-      name = "moodle-on-aws"
+      name = "" 
     }
   }
   required_providers {
